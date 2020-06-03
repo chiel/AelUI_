@@ -2,5 +2,6 @@
 ## Title: AelUI
 ## Author: Aelen
 ## Version: 0.1
+## Dependencies: oUF
 
 init.lua
