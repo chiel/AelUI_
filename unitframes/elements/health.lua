@@ -13,7 +13,7 @@ addon.elements.Health = function(frame, unit)
 		Health:SetValue(max - Health:GetValue())
 	end
 
-	addon.elements.CreateBg(Health)
+	addon.elements.CreateFg(Health)
 
 	frame.Health = Health
 end

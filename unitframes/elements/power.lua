@@ -3,7 +3,7 @@ local addon = select(2, ...)
 
 addon.elements.Power = function(self, unit)
 	local Power = CreateFrame('StatusBar', nil, self)
-	Power:SetStatusBarTexture(addon.media.textureBg)
+	Power:SetStatusBarTexture(addon.media.texture)
 	Power.frequentUpdates = true
 	Power.colorPower = true
 
