@@ -23,6 +23,7 @@ addon.colors = setmetatable({
 
 addon.media = {
 	border = [[Interface\AddOns\AelUI\border]],
+	fontPixel = [[Interface\AddOns\AelUI\media\semplice.ttf]],
 	texture = [[Interface\AddOns\AelUI\media\statusbar]],
 	textureBg = [[Interface\Buttons\WHITE8X8]],
 }
