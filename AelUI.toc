@@ -5,4 +5,5 @@
 ## Dependencies: oUF
 
 init.lua
+utils\load.xml
 unitframes\load.xml
