@@ -20,5 +20,22 @@ addon.units.player = {
 		addon.elements.Castbar(frame, unit)
 		frame.Castbar:SetPoint('TOP', UIParent, 'CENTER', 0, -326)
 		frame.Castbar:SetWidth(298)
+
+		local playerClass = select(2, UnitClass('player'))
+		local playerSpec = addon.utils.GetSpecName()
+		local hasClassResources = false
+
+		if playerClass == 'DEATHKNIGHT' then
+			local runeFrame = addon.elements.Runes(frame, unit)
+			runeFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -310)
+			runeFrame:SetSize(298, 5)
+
+			hasClassResources = true
+		end
+
+		if hasClassResources then
+			frame.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -316)
+			frame.Power:SetHeight(4)
+		end
 	end,
 }

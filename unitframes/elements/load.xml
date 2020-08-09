@@ -3,4 +3,5 @@
 	<Script file="castbar.lua"/>
 	<Script file="health.lua"/>
 	<Script file="power.lua"/>
+	<Script file="runes.lua"/>
 </Ui>
