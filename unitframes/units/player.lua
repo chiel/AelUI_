@@ -1,28 +1,27 @@
 local addon = select(2, ...)
 
+local playerClass = select(2, UnitClass('player'))
+
 local updateClassResources = function(frame, unit)
-	local playerClass = select(2, UnitClass('player'))
 	local playerSpec = addon.utils.GetSpecName()
 	local hasClassResources = false
 
 	if playerClass == 'DEATHKNIGHT' then
-		local runeFrame = addon.elements.Runes(frame, unit)
-		runeFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -310)
-		runeFrame:SetSize(298, 5)
 		hasClassResources = true
 
 	elseif playerClass == 'MONK' then
 		if playerSpec == 'BREWMASTER' then
 			hasClassResources = true
+
 		end
 	end
 
 	if hasClassResources then
-		frame.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -316)
-		frame.Power:SetHeight(4)
+		frame.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -306)
+		frame.Power:SetHeight(6)
 	else
-		frame.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -310)
-		frame.Power:SetHeight(10)
+		frame.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
+		frame.Power:SetHeight(12)
 	end
 end
 
@@ -43,22 +42,26 @@ addon.units.player = {
 		frame.Power:SetWidth(298)
 
 		addon.elements.Castbar(frame, unit)
-		frame.Castbar:SetPoint('TOP', UIParent, 'CENTER', 0, -326)
-		frame.Castbar:SetWidth(298)
+		frame.Castbar:SetPoint('TOP', UIParent, 'CENTER', 0, -318)
+		frame.Castbar:SetSize(298, 12)
 
 		local name = addon.elements.Text(frame.Health)
 		frame:Tag(name, '[AelUI:name]')
 		name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 4, -6)
+
+		if playerClass == 'DEATHKNIGHT' then
+			local runeFrame = addon.elements.Runes(frame, unit)
+			runeFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -310)
+			runeFrame:SetSize(298, 5)
+		end
 
 		updateClassResources(frame, unit)
 
 		local f = CreateFrame('Frame', nil, UIParent)
 		f:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED')
 		f:SetScript('OnEvent', function(self, event, u)
-			if event == 'PLAYER_SPECIALIZATION_CHANGED' then
-				if u == 'player' then
-					updateClassResources(frame, unit)
-				end
+			if event == 'PLAYER_SPECIALIZATION_CHANGED' and u == 'player' then
+				updateClassResources(frame, unit)
 			end
 		end)
 	end,
