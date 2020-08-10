@@ -24,6 +24,8 @@ addon.elements.CreateBg = function(ParentFrame)
 	Bg:SetBackdropBorderColor(0, 0, 0)
 	Bg:SetPoint('TOPLEFT', -1, 1)
 	Bg:SetPoint('BOTTOMRIGHT', 1, -1)
+
+	return Bg
 end
 
 addon.elements.CreateFg = function(ParentFrame)

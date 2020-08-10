@@ -13,6 +13,9 @@ local updateClassResources = function(frame, unit)
 		if playerSpec == 'BREWMASTER' then
 			hasClassResources = true
 
+		elseif playerSpec == 'WINDWALKER' then
+			hasClassResources = true
+
 		end
 	end
 
@@ -48,6 +51,10 @@ addon.units.player = {
 		local name = addon.elements.Text(frame.Health)
 		frame:Tag(name, '[AelUI:name]')
 		name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 4, -6)
+
+		addon.elements.ClassPower(frame, unit)
+		frame.classPowerFrame:SetSize(298, 5)
+		frame.classPowerFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
 
 		if playerClass == 'DEATHKNIGHT' then
 			local runeFrame = addon.elements.Runes(frame, unit)
