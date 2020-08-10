@@ -4,5 +4,6 @@
 	<Script file="health.lua"/>
 	<Script file="power.lua"/>
 	<Script file="runes.lua"/>
+	<Script file="tags.lua"/>
 	<Script file="text.lua"/>
 </Ui>

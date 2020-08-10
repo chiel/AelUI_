@@ -46,6 +46,10 @@ addon.units.player = {
 		frame.Castbar:SetPoint('TOP', UIParent, 'CENTER', 0, -326)
 		frame.Castbar:SetWidth(298)
 
+		local name = addon.elements.Text(frame.Health)
+		frame:Tag(name, '[AelUI:name]')
+		name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 4, -6)
+
 		updateClassResources(frame, unit)
 
 		local f = CreateFrame('Frame', nil, UIParent)
