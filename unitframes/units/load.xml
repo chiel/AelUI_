@@ -1,5 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="init.lua"/>
 	<Script file="player.lua"/>
+	<Script file="target.lua"/>
 	<Script file="spawn.lua"/>
 </Ui>
