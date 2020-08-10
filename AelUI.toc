@@ -4,6 +4,7 @@
 ## Version: 0.1
 ## Dependencies: oUF
 
+libs\UTF8\utf8.lua
 init.lua
 utils\load.xml
 unitframes\load.xml
