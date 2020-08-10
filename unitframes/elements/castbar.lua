@@ -13,14 +13,12 @@ addon.elements.Castbar = function(frame, unit)
 	Icon:SetSize(32, 32)
 	Icon:SetPoint('BOTTOMRIGHT', Castbar, 'BOTTOMLEFT', -5, -1)
 
-	local Text = Castbar:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
-	Text:SetFont(addon.media.fontPixel, 8, 'MONOCHROME,OUTLINE')
-	Text:SetTextColor(1, 1, 1)
+	local options = { pixel = true, size = 8 }
+
+	local Text = addon.elements.Text(Castbar, options)
 	Text:SetPoint('TOPLEFT', Castbar, 'BOTTOMLEFT', 4, -6)
 
-	local Time = Castbar:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
-	Time:SetFont(addon.media.fontPixel, 8, 'MONOCHROME,OUTLINE')
-	Time:SetTextColor(1, 1, 1)
+	local Time = addon.elements.Text(Castbar, options)
 	Time:SetPoint('TOPRIGHT', Castbar, 'BOTTOMRIGHT', -4, -6)
 
 	Castbar.Icon = Icon
