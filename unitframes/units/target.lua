@@ -13,6 +13,13 @@ addon.units.target = {
 		addon.elements.Health(frame, unit)
 		frame.Health:SetAllPoints()
 
+		local Buffs = CreateFrame('Frame', nil, frame)
+		Buffs.size = 24
+		Buffs.spacing = 4
+		Buffs:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', -1, 5)
+		Buffs:SetSize(32 * 4, 32 * 4)
+		frame.Buffs = Buffs
+
 		local name = addon.elements.Text(frame.Health)
 		frame:Tag(name, '[AelUI:name]')
 		name:SetPoint('BOTTOMRIGHT', frame, 'TOPRIGHT', -4, -6)
