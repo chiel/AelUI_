@@ -57,9 +57,9 @@ addon.units.player = {
 		frame.classPowerFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
 
 		if playerClass == 'DEATHKNIGHT' then
-			local runeFrame = addon.elements.Runes(frame, unit)
-			runeFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -310)
-			runeFrame:SetSize(298, 5)
+			addon.elements.Runes(frame, unit)
+			frame.runesFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
+			frame.runesFrame:SetSize(298, 5)
 		end
 
 		updateClassResources(frame, unit)
