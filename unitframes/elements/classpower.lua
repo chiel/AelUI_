@@ -2,6 +2,7 @@ local addon = select(2, ...)
 
 addon.elements.ClassPower = function(frame, unit)
 	local classPowerFrame = CreateFrame('Frame', nil, UIParent)
+	classPowerFrame:SetFrameStrata('LOW')
 
 	local ClassPower = {}
 	for i = 1, 10 do
