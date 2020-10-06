@@ -1,4 +1,3 @@
-print("AelUI: unitframes/elements/health.lua")
 local addon = select(2, ...)
 
 addon.elements.Health = function(frame, unit)

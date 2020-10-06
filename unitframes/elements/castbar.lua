@@ -1,4 +1,3 @@
-print("AelUI: unitframes/elements/castbar.lua")
 local addon = select(2, ...)
 
 addon.elements.Castbar = function(frame, unit)

@@ -1,4 +1,3 @@
-print("AelUI: unitframes/elements/text.lua")
 local addon = select(2, ...)
 
 addon.elements.Text = function(parent, options)

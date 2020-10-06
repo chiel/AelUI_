@@ -1,4 +1,3 @@
-print("AelUI: unitframes/units/spawn.lua")
 local addon = select(2, ...)
 
 for unit, conf in pairs(addon.units) do

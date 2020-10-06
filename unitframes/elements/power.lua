@@ -1,4 +1,3 @@
-print("AelUI: unitframes/elements/power.lua")
 local addon = select(2, ...)
 
 addon.elements.Power = function(frame, unit)

@@ -1,4 +1,3 @@
-print('AelUI: utils/GetSpecName.lua')
 local addon = select(2, ...)
 
 addon.utils.Hex = function(r, g, b)

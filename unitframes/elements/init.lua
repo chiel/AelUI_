@@ -1,4 +1,3 @@
-print("AelUI: unitframes/elements/init.lua")
 local addon = select(2, ...)
 
 addon.elements = {}
