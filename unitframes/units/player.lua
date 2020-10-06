@@ -49,6 +49,11 @@ addon.units.player = {
 		frame:Tag(name, '[AelUI:name]')
 		name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 4, -6)
 
+		local power = addon.elements.Text(frame.Power)
+		frame:Tag(power, '[AelUI:power]')
+		power:SetJustifyH('CENTER')
+		power:SetPoint('BOTTOM', frame.Power, 'BOTTOM', 0, -4)
+
 		addon.elements.ClassPower(frame, unit)
 		frame.classPowerFrame:SetSize(298, 5)
 		frame.classPowerFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)

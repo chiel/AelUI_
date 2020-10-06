@@ -18,3 +18,8 @@ oUF.Tags.Methods['AelUI:name'] = function(unit)
 	end
 	return name
 end
+
+oUF.Tags.Events['AelUI:power'] = 'UNIT_DISPLAYPOWER UNIT_MAXPOWER UNIT_POWER_UPDATE'
+oUF.Tags.Methods['AelUI:power'] = function(unit)
+	return UnitPower(unit)
+end
