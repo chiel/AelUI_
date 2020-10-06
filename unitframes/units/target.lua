@@ -13,6 +13,12 @@ addon.units.target = {
 		addon.elements.Health(frame, unit)
 		frame.Health:SetAllPoints()
 
+		addon.elements.Castbar(frame, unit)
+		frame.Castbar:SetPoint('TOP', UIParent, 'CENTER', 0, -140)
+		frame.Castbar:SetSize(298, 12)
+		frame.Castbar.Icon:ClearAllPoints()
+		frame.Castbar.Icon:SetPoint('TOPRIGHT', frame.Castbar, 'TOPLEFT', -5, 1)
+
 		local Buffs = CreateFrame('Frame', nil, frame)
 		Buffs.size = 24
 		Buffs.spacing = 4
