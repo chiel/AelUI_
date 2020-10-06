@@ -10,10 +10,7 @@ local updateClassResources = function(frame, unit)
 		hasClassResources = true
 
 	elseif playerClass == 'MONK' then
-		if playerSpec == 'BREWMASTER' then
-			hasClassResources = true
-
-		elseif playerSpec == 'WINDWALKER' then
+		if playerSpec == 'WINDWALKER' then
 			hasClassResources = true
 
 		end
