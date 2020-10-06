@@ -19,6 +19,7 @@ addon.elements.Castbar = function(frame, unit)
 
 	local Time = addon.elements.Text(Castbar, options)
 	Time:SetPoint('TOPRIGHT', Castbar, 'BOTTOMRIGHT', -4, -6)
+	Time:SetJustifyH('RIGHT')
 
 	Castbar.Icon = Icon
 	Castbar.Text = Text
