@@ -53,6 +53,29 @@ addon.units.player = {
 		frame:Tag(power, '[AelUI:power]')
 		power:SetJustifyH('CENTER')
 		power:SetPoint('BOTTOM', frame.Power, 'BOTTOM', 0, -4)
+		local powerTextShown = true
+
+		local _, powerType = UnitPowerType('player')
+		if powerType == 'MANA' then
+			power:Hide()
+			powerTextShown = false
+		end
+
+		frame.Power.PostUpdate = function()
+			local _, powerType = UnitPowerType('player')
+			if powerType == 'MANA' then
+				if powerTextShown then
+					power:Hide()
+					powerTextShown = false
+				end
+				return
+			end
+
+			if not powerTextShown then
+				power:Show()
+				powerTextShown = true
+			end
+		end
 
 		addon.elements.ClassPower(frame, unit)
 		frame.classPowerFrame:SetSize(298, 5)
