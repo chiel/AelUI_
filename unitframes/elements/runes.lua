@@ -2,6 +2,7 @@ local addon = select(2, ...)
 
 addon.elements.Runes = function(frame, unit)
 	local runesFrame = CreateFrame('Frame', nil, UIParent)
+	runesFrame:SetFrameStrata('LOW')
 
 	local Runes = {}
 	for i = 1, 6 do
