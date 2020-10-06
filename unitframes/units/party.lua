@@ -55,8 +55,6 @@ addon.units.party = {
 		frame.Power:SetStatusBarColor(unpack(frame.colors.power.MANA))
 		frame.Power.Override = UpdateGroupPower
 
-		local role = UnitGroupRolesAssigned(frame.unit)
-
 		local name = addon.elements.Text(frame.Health)
 		frame:Tag(name, '[AelUI:name]')
 		name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 4, -6)
