@@ -1,12 +1,11 @@
 local addon = select(2, ...)
 
-addon.elements.Power = function(frame, unit)
-	local Power = CreateFrame('StatusBar', nil, frame)
-	Power:SetStatusBarTexture(addon.media.texture)
-	Power.frequentUpdates = true
-	Power.colorPower = true
+function addon.elements.Power(self, unit)
+	local power = CreateFrame('StatusBar', nil, self)
+	power:SetStatusBarTexture(addon.media.texture)
+	power.colorPower = true
+	power.frequentUpdates = true
+	power.bd = addon.elements.Backdrop(power)
 
-	addon.elements.CreateBg(Power)
-
-	frame.Power = Power
+	self.Power = power
 end

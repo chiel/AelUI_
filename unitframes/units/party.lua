@@ -1,11 +1,11 @@
 local addon = select(2, ...)
 
-local function UpdateGroupPower(frame, event, unit)
-	if(unit ~= frame.unit) then
+local function UpdateGroupPower(self, event, unit)
+	if(unit ~= self.unit) then
 		return
 	end
 
-	local element = frame.Power
+	local element = self.Power
 	local visibility = false
 
 	if UnitIsConnected(unit) and not UnitHasVehicleUI(unit) then
@@ -14,11 +14,11 @@ local function UpdateGroupPower(frame, event, unit)
 	end
 
 	if visibility then
-		frame.Health:SetPoint('BOTTOM', 0, 5)
+		self.Health:SetPoint('BOTTOM', 0, 5)
 		element:SetMinMaxValues(0, UnitPowerMax(unit, Enum.PowerType.Mana))
 		element:SetValue(UnitPower(unit, Enum.PowerType.Mana))
 	else
-		frame.Health:SetPoint('BOTTOM', 0, 0)
+		self.Health:SetPoint('BOTTOM', 0, 0)
 	end
 
 	element:SetShown(visibility)
@@ -27,7 +27,7 @@ end
 addon.units.party = {
 	spawn = function(self)
 		local party = self:SpawnHeader(
-			'aelUI_party', nil, 'solo,party',
+			'aelUI_party', nil, 'party',
 			'showParty', true,
 			'showPlayer', true,
 			'yOffset', -24,
@@ -42,24 +42,28 @@ addon.units.party = {
 		party:SetPoint('TOPRIGHT', UIParent, 'CENTER', -596, 90)
 	end,
 
-	style = function(frame, unit)
-		addon.elements.Base(frame, unit)
+	style = function(self, unit)
+		self:RegisterForClicks('AnyUp')
+		self:SetScript('OnEnter', UnitFrame_OnEnter)
+		self:SetScript('OnLeave', UnitFrame_OnLeave)
 
-		addon.elements.Health(frame, unit)
-		frame.Health:SetAllPoints()
+		self.colors = addon.colors
 
-		addon.elements.Power(frame, unit)
-		frame.Power:SetPoint('BOTTOMLEFT')
-		frame.Power:SetPoint('BOTTOMRIGHT')
-		frame.Power:SetHeight(4)
-		frame.Power:SetStatusBarColor(unpack(frame.colors.power.MANA))
-		frame.Power.Override = UpdateGroupPower
+		addon.elements.Health(self, unit)
+		self.Health:SetAllPoints()
 
-		local name = addon.elements.Text(frame.Health)
-		frame:Tag(name, '[AelUI:name]')
-		name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 4, -6)
+		addon.elements.Power(self, unit)
+		self.Power:SetPoint('BOTTOMLEFT')
+		self.Power:SetPoint('BOTTOMRIGHT')
+		self.Power:SetHeight(4)
+		self.Power:SetStatusBarColor(unpack(self.colors.power.MANA))
+		self.Power.Override = UpdateGroupPower
 
-		frame.Range = {
+		local name = addon.elements.Text(self.Health)
+		self:Tag(name, '[AelUI:name]')
+		name:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 4, -6)
+
+		self.Range = {
 			insideAlpha = 1,
 			outsideAlpha = .6,
 		}

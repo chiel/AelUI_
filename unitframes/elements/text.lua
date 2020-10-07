@@ -1,6 +1,6 @@
 local addon = select(2, ...)
 
-addon.elements.Text = function(parent, options)
+function addon.elements.Text(parent, options)
 	local options = options or {}
 	options.pixel = options.pixel or false
 	options.size = options.size or 20
@@ -8,9 +8,9 @@ addon.elements.Text = function(parent, options)
 	local font = options.pixel and addon.media.fontPixel or addon.media.font
 	local flags = options.pixel and 'MONOCHROME,OUTLINE' or 'OUTLINE'
 
-	local Text = parent:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
-	Text:SetFont(font, options.size, flags)
-	Text:SetTextColor(1, 1, 1)
+	local text = parent:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
+	text:SetFont(font, options.size, flags)
+	text:SetTextColor(1, 1, 1)
 
-	return Text
+	return text
 end

@@ -2,98 +2,102 @@ local addon = select(2, ...)
 
 local playerClass = select(2, UnitClass('player'))
 
-local updateClassResources = function(frame, unit)
+local classResourceMap = {
+	DEATHKNIGHT = { BLOOD = true, FROST = true, UNHOLY = true },
+	MAGE = { ARCANE = true,  },
+	MONK = { WINDWALKER = true },
+	PALADIN = { HOLY = true },
+	ROGUE = { ASSASSINATION = true, OUTLAW = true, SUBTLETY = true },
+	WARLOCK = { AFFLICTION = true, DEMONOLOGY = true, DESTRUCTION = true },
+}
+
+local updateClassResources = function(self, unit)
 	local playerSpec = addon.utils.GetSpecName()
-	local hasClassResources = false
-
-	if playerClass == 'DEATHKNIGHT' then
-		hasClassResources = true
-
-	elseif playerClass == 'MONK' then
-		if playerSpec == 'WINDWALKER' then
-			hasClassResources = true
-
-		end
-	end
+	local hasClassResources = classResourceMap[playerClass]
+		and classResourceMap[playerClass][playerSpec]
 
 	if hasClassResources then
-		frame.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -306)
-		frame.Power:SetHeight(6)
+		self.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -306)
+		self.Power:SetHeight(6)
 	else
-		frame.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
-		frame.Power:SetHeight(12)
+		self.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
+		self.Power:SetHeight(12)
 	end
 end
 
 addon.units.player = {
 	spawn = function(self)
-		local frame = self:Spawn('player')
-		frame:SetSize(300, 30)
-		frame:SetPoint('TOPRIGHT', UIParent, 'CENTER', -191, -300)
+		local f = self:Spawn('player')
+		f:SetSize(300, 30)
+		f:SetPoint('TOPRIGHT', UIParent, 'CENTER', -191, -300)
 	end,
 
-	style = function(frame, unit)
-		addon.elements.Base(frame, unit)
+	style = function(self, unit)
+		self:RegisterForClicks('AnyUp')
+		self:SetScript('OnEnter', UnitFrame_OnEnter)
+		self:SetScript('OnLeave', UnitFrame_OnLeave)
 
-		addon.elements.Health(frame, unit)
-		frame.Health:SetAllPoints()
+		self.colors = addon.colors
 
-		addon.elements.Power(frame, unit)
-		frame.Power:SetWidth(298)
+		addon.elements.Health(self, unit)
+		self.Health:SetAllPoints()
 
-		addon.elements.Castbar(frame, unit)
-		frame.Castbar:SetPoint('TOP', UIParent, 'CENTER', 0, -318)
-		frame.Castbar:SetSize(298, 12)
+		addon.elements.Power(self, unit)
+		self.Power:SetWidth(298)
 
-		local name = addon.elements.Text(frame.Health)
-		frame:Tag(name, '[AelUI:name]')
-		name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 4, -6)
+		addon.elements.Castbar(self, unit)
+		self.Castbar:SetPoint('TOP', UIParent, 'CENTER', 0, -318)
+		self.Castbar:SetSize(298, 12)
 
-		local power = addon.elements.Text(frame.Power)
-		frame:Tag(power, '[AelUI:power]')
-		power:SetJustifyH('CENTER')
-		power:SetPoint('BOTTOM', frame.Power, 'BOTTOM', 0, -4)
+		local name = addon.elements.Text(self.Health)
+		self:Tag(name, '[AelUI:name]')
+		name:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 4, -6)
+
+		local powerText = addon.elements.Text(self.Power)
+		self:Tag(powerText, '[AelUI:power]')
+		powerText:SetJustifyH('CENTER')
+		powerText:SetPoint('BOTTOM', self.Power, 'BOTTOM', 0, -4)
 		local powerTextShown = true
 
 		local _, powerType = UnitPowerType('player')
 		if powerType == 'MANA' then
-			power:Hide()
+			powerText:Hide()
 			powerTextShown = false
 		end
 
-		frame.Power.PostUpdate = function()
+		self.Power.PostUpdate = function()
 			local _, powerType = UnitPowerType('player')
 			if powerType == 'MANA' then
 				if powerTextShown then
-					power:Hide()
+					powerText:Hide()
 					powerTextShown = false
 				end
 				return
 			end
 
 			if not powerTextShown then
-				power:Show()
+				powerText:Show()
 				powerTextShown = true
 			end
 		end
 
-		addon.elements.ClassPower(frame, unit)
-		frame.classPowerFrame:SetSize(298, 5)
-		frame.classPowerFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
+		addon.elements.ClassPower(self, unit)
+		self.classPowerFrame:SetSize(298, 5)
+		self.classPowerFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
 
 		if playerClass == 'DEATHKNIGHT' then
-			addon.elements.Runes(frame, unit)
-			frame.runesFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
-			frame.runesFrame:SetSize(298, 5)
+			addon.elements.Runes(self, unit)
+			self.runesFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
+			self.runesFrame:SetSize(298, 5)
 		end
 
-		updateClassResources(frame, unit)
+		updateClassResources(self, unit)
 
-		local f = CreateFrame('Frame', nil, UIParent)
+		local f = CreateFrame('Frame')
 		f:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED')
-		f:SetScript('OnEvent', function(self, event, u)
+		f:SetScript('OnEvent', function(_, event, u)
 			if event == 'PLAYER_SPECIALIZATION_CHANGED' and u == 'player' then
-				updateClassResources(frame, unit)
+				updateClassResources(self, unit)
 			end
 		end)
 	end,

@@ -1,18 +1,36 @@
 local addon = select(2, ...)
 
-addon.elements.Health = function(frame, unit)
-	local Health = CreateFrame('StatusBar', nil, frame)
-	Health:SetStatusBarTexture(addon.media.textureBg)
-	Health.frequentUpdates = true
-	Health.colorTapping = true
-	Health.colorClass = true
-	Health.colorReaction = true
-	Health:SetReverseFill(true)
-	Health.PostUpdate = function(Health, unit, min, max)
-		Health:SetValue(max - Health:GetValue())
+local function UpdateHealthColor(health, unit, cur, max)
+	local r, g, b, t
+	if health.disconnected and health.colorDisconnected or UnitIsDeadOrGhost(unit) then
+		health:SetValue(max)
+		t = colors.disconnected
+	elseif health.colorTapping and not UnitPlayerControlled(unit) and UnitIsTapDenied(unit) then
+		t = colors.tapped
+	else
+		t = {.15, .15, .15}
 	end
 
-	addon.elements.CreateFg(Health)
+	if t then
+		r, g, b = t[1], t[2], t[3]
+	end
 
-	frame.Health = Health
+	if b then
+		health:SetStatusBarColor(r, g, b)
+
+		local _, class = UnitClass(unit)
+		health.bd:SetBackdropColor(unpack(addon.colors.class[class]))
+	end
+end
+
+function addon.elements.Health(self, unit)
+	local health = CreateFrame('StatusBar', nil, self)
+	health:SetStatusBarTexture(addon.media.texture)
+	health.colorTapping = unit ~= 'raid'
+	health.colorDisconnected = true
+	health.frequentUpdates = true
+	health.UpdateColor = UpdateHealthColor
+	health.bd = addon.elements.Backdrop(health)
+
+	self.Health = health
 end

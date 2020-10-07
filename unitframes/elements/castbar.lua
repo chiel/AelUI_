@@ -1,29 +1,28 @@
 local addon = select(2, ...)
 
-addon.elements.Castbar = function(frame, unit)
-	local Castbar = CreateFrame('StatusBar', nil, frame)
-	Castbar:SetStatusBarTexture(addon.media.texture)
-	Castbar:SetStatusBarColor(22 / 255, 142 / 255, 198 / 255)
-	Castbar:SetHeight(4)
+function addon.elements.Castbar(self, unit)
+	local castbar = CreateFrame('StatusBar', nil, self)
+	castbar:SetStatusBarTexture(addon.media.texture)
+	castbar:SetStatusBarColor(22 / 255, 142 / 255, 198 / 255)
+	castbar:SetHeight(4)
+	castbar.bd = addon.elements.Backdrop(castbar)
 
-	addon.elements.CreateBg(Castbar)
-
-	local Icon = Castbar:CreateTexture(nil, 'OVERLAY')
+	local Icon = castbar:CreateTexture(nil, 'OVERLAY')
 	Icon:SetSize(32, 32)
-	Icon:SetPoint('BOTTOMRIGHT', Castbar, 'BOTTOMLEFT', -5, -1)
+	Icon:SetPoint('BOTTOMRIGHT', castbar, 'BOTTOMLEFT', -5, -1)
 
 	local options = { pixel = true, size = 8 }
 
-	local Text = addon.elements.Text(Castbar, options)
-	Text:SetPoint('TOPLEFT', Castbar, 'BOTTOMLEFT', 4, -6)
+	local Text = addon.elements.Text(castbar, options)
+	Text:SetPoint('TOPLEFT', castbar, 'BOTTOMLEFT', 4, -6)
 
-	local Time = addon.elements.Text(Castbar, options)
-	Time:SetPoint('TOPRIGHT', Castbar, 'BOTTOMRIGHT', -4, -6)
+	local Time = addon.elements.Text(castbar, options)
+	Time:SetPoint('TOPRIGHT', castbar, 'BOTTOMRIGHT', -4, -6)
 	Time:SetJustifyH('RIGHT')
 
-	Castbar.Icon = Icon
-	Castbar.Text = Text
-	Castbar.Time = Time
+	castbar.Icon = Icon
+	castbar.Text = Text
+	castbar.Time = Time
 
-	frame.Castbar = Castbar
+	self.Castbar = castbar
 end

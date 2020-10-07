@@ -2,19 +2,23 @@ local addon = select(2, ...)
 
 addon.units.focus = {
 	spawn = function(self)
-		local frame = self:Spawn('focus')
-		frame:SetSize(150, 20)
-		frame:SetPoint('TOPRIGHT', UIParent, 'CENTER', -497, -310)
+		local f = self:Spawn('focus')
+		f:SetSize(150, 20)
+		f:SetPoint('TOPRIGHT', UIParent, 'CENTER', -497, -310)
 	end,
 
-	style = function(frame, unit)
-		addon.elements.Base(frame, unit)
+	style = function(self, unit)
+		self:RegisterForClicks('AnyUp')
+		self:SetScript('OnEnter', UnitFrame_OnEnter)
+		self:SetScript('OnLeave', UnitFrame_OnLeave)
 
-		addon.elements.Health(frame, unit)
-		frame.Health:SetAllPoints()
+		self.colors = addon.colors
 
-		local name = addon.elements.Text(frame.Health)
-		frame:Tag(name, '[AelUI:name]')
-		name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 4, -6)
+		addon.elements.Health(self, unit)
+		self.Health:SetAllPoints()
+
+		local name = addon.elements.Text(self.Health)
+		self:Tag(name, '[AelUI:name]')
+		name:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 4, -6)
 	end,
 }

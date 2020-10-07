@@ -1,24 +1,24 @@
 local addon = select(2, ...)
 
-addon.elements.ClassPower = function(frame, unit)
+function addon.elements.ClassPower(self, unit)
 	local classPowerFrame = CreateFrame('Frame', nil, UIParent)
 	classPowerFrame:SetFrameStrata('LOW')
 
-	local ClassPower = {}
+	local classPower = {}
 	for i = 1, 10 do
-		local bg = addon.elements.CreateBg(classPowerFrame)
-		bg:ClearAllPoints()
-		bg:SetPoint('BOTTOM', classPowerFrame, 'BOTTOM', 0, -1)
+		local bd = addon.elements.Backdrop(classPowerFrame)
+		bd:ClearAllPoints()
+		bd:SetPoint('BOTTOM', classPowerFrame, 'BOTTOM', 0, -1)
 
-		local Bar = CreateFrame('StatusBar', nil, bg)
-		Bar:SetStatusBarTexture(addon.media.texture)
+		local bar = CreateFrame('StatusBar', nil, bd)
+		bar:SetStatusBarTexture(addon.media.texture)
 
-		Bar.bgFrame = bg
-		ClassPower[i] = Bar
+		bar.bd = bd
+		classPower[i] = bar
 	end
 
-	ClassPower.PostUpdate = function(self, cur, max, maxChanged, powerType)
-		if not ClassPower.isEnabled then
+	classPower.PostUpdate = function(self, cur, max, maxChanged, powerType)
+		if not classPower.isEnabled then
 			classPowerFrame:Hide()
 			return
 		end
@@ -29,21 +29,21 @@ addon.elements.ClassPower = function(frame, unit)
 
 		local width = 300 / max
 		for i = 1, 10 do
-			local Bar = ClassPower[i]
-			local bg = Bar.bgFrame
+			local bar = classPower[i]
+			local bd = bar.bd
 
 			if i <= max then
-				bg:SetWidth(width)
-				bg:SetPoint('TOPLEFT', classPowerFrame, 'TOPLEFT', ((i - 1) * width) - 1, 1)
-				Bar:SetPoint('TOPLEFT', bg, 'TOPLEFT', 1, -1)
-				Bar:SetPoint('BOTTOMRIGHT', bg, 'BOTTOMRIGHT', -1, 1)
-				bg:Show()
+				bd:SetWidth(width)
+				bd:SetPoint('TOPLEFT', classPowerFrame, 'TOPLEFT', ((i - 1) * width) - 1, 1)
+				bar:SetPoint('TOPLEFT', bd, 'TOPLEFT', 1, -1)
+				bar:SetPoint('BOTTOMRIGHT', bd, 'BOTTOMRIGHT', -1, 1)
+				bd:Show()
 			else
-				bg:Hide()
+				bd:Hide()
 			end
 		end
 	end
 
-	frame.ClassPower = ClassPower
-	frame.classPowerFrame = classPowerFrame
+	self.ClassPower = classPower
+	self.classPowerFrame = classPowerFrame
 end

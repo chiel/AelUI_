@@ -19,7 +19,7 @@ oUF.Tags.Methods['AelUI:name'] = function(unit)
 	return name
 end
 
-oUF.Tags.Events['AelUI:power'] = 'UNIT_DISPLAYPOWER UNIT_MAXPOWER UNIT_POWER_UPDATE'
+oUF.Tags.Events['AelUI:power'] = 'UNIT_DISPLAYPOWER UNIT_MAXPOWER UNIT_POWER_FREQUENT'
 oUF.Tags.Methods['AelUI:power'] = function(unit)
 	return UnitPower(unit)
 end

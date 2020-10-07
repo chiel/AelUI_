@@ -2,42 +2,16 @@ local addon = select(2, ...)
 
 addon.elements = {}
 
-addon.elements.Base = function(frame, unit)
-	frame:SetScript('OnEnter', UnitFrame_OnEnter)
-	frame:SetScript('OnLeave', UnitFrame_OnLeave)
-	frame:RegisterForClicks('AnyUp')
+function addon.elements.Backdrop(parent, color)
+	r, g, b = unpack(color or { .2, .2, .2 })
 
-	frame.colors = addon.colors
-end
+	local bd = CreateFrame('Frame', nil, parent)
+	bd:SetFrameLevel(parent:GetFrameLevel() - 1)
+	bd:SetBackdrop(addon.media.backdrop)
+	bd:SetBackdropColor(r, g, b, 1)
+	bd:SetBackdropBorderColor(1, 0, 0)
+	bd:SetPoint('TOPLEFT', -1, 1)
+	bd:SetPoint('BOTTOMRIGHT', 1, -1)
 
-addon.elements.CreateBg = function(ParentFrame)
-	local Bg = CreateFrame('Frame', nil, ParentFrame)
-	Bg:SetFrameLevel(0)
-	Bg:SetBackdrop({
-		bgFile = addon.media.textureBg,
-		edgeFile = addon.media.border,
-		tile = false, tileSize = 4, edgeSize = 1,
-		insets = { left = 1, right = 1, top = 1, bottom = 1 }
-	})
-	Bg:SetBackdropColor(.2, .2, .2, 1)
-	Bg:SetBackdropBorderColor(0, 0, 0)
-	Bg:SetPoint('TOPLEFT', -1, 1)
-	Bg:SetPoint('BOTTOMRIGHT', 1, -1)
-
-	return Bg
-end
-
-addon.elements.CreateFg = function(ParentFrame)
-	local Bg = CreateFrame('Frame', nil, ParentFrame)
-	Bg:SetFrameLevel(0)
-	Bg:SetBackdrop({
-		bgFile = addon.media.texture,
-		edgeFile = addon.media.border,
-		tile = false, tileSize = 4, edgeSize = 1,
-		insets = { left = 1, right = 1, top = 1, bottom = 1 }
-	})
-	Bg:SetBackdropColor(.2, .2, .2, 1)
-	Bg:SetBackdropBorderColor(0, 0, 0)
-	Bg:SetPoint('TOPLEFT', -1, 1)
-	Bg:SetPoint('BOTTOMRIGHT', 1, -1)
+	return bd
 end
