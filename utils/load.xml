@@ -3,4 +3,5 @@
 	<Script file="GetSpecName.lua"/>
 	<Script file="Hex.lua"/>
 	<Script file="UnitColor.lua"/>
+	<Script file="UnitIsHealer.lua"/>
 </Ui>
