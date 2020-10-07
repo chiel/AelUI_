@@ -1,27 +1,17 @@
 local addon = select(2, ...)
 
-local function UpdateGroupPower(self, event, unit)
-	if(unit ~= self.unit) then
-		return
+local function UpdatePower(self, event, unit)
+	if(unit ~= self.unit) then return end
+
+	local visible = addon.utils.UnitIsHealer(unit)
+
+	if visible then
+		self.Power:SetMinMaxValues(0, UnitPowerMax(unit, Enum.PowerType.Mana))
+		self.Power:SetValue(UnitPower(unit, Enum.PowerType.Mana))
 	end
 
-	local element = self.Power
-	local visibility = false
-
-	if UnitIsConnected(unit) and not UnitHasVehicleUI(unit) then
-		local role = UnitGroupRolesAssigned(unit)
-		visibility = role == 'HEALER' and UnitPowerType(unit) == Enum.PowerType.Mana
-	end
-
-	if visibility then
-		self.Health:SetPoint('BOTTOM', 0, 5)
-		element:SetMinMaxValues(0, UnitPowerMax(unit, Enum.PowerType.Mana))
-		element:SetValue(UnitPower(unit, Enum.PowerType.Mana))
-	else
-		self.Health:SetPoint('BOTTOM', 0, 0)
-	end
-
-	element:SetShown(visibility)
+	self.Health:SetPoint('BOTTOM', 0, visible and 5 or 0)
+	self.Power:SetShown(visible)
 end
 
 addon.units.party = {
@@ -57,7 +47,7 @@ addon.units.party = {
 		self.Power:SetPoint('BOTTOMRIGHT')
 		self.Power:SetHeight(4)
 		self.Power:SetStatusBarColor(unpack(self.colors.power.MANA))
-		self.Power.Override = UpdateGroupPower
+		self.Power.Override = UpdatePower
 
 		local name = addon.elements.Text(self.Health)
 		self:Tag(name, '[AelUI:name]')
