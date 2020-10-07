@@ -3,7 +3,7 @@ local addon = select(2, ...)
 addon.elements = {}
 
 function addon.elements.Backdrop(parent, color)
-	r, g, b = unpack(color or { .2, .2, .2 })
+	r, g, b = unpack(color or {.2, .2, .2})
 
 	local bd = CreateFrame('Frame', nil, parent)
 	bd:SetFrameLevel(parent:GetFrameLevel() - 1)
