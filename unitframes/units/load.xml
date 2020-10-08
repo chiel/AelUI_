@@ -1,5 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="init.lua"/>
+	<Script file="boss.lua"/>
 	<Script file="focus.lua"/>
 	<Script file="party.lua"/>
 	<Script file="player.lua"/>
