@@ -31,6 +31,14 @@ addon.units.boss = {
 		self.Power:SetPoint('BOTTOMRIGHT')
 		self.Power:SetHeight(4)
 
+		addon.elements.Castbar(self, unit)
+		self.Castbar:SetPoint('TOPLEFT', self.Power, 'BOTTOMLEFT', 0, -4)
+		self.Castbar:SetPoint('TOPRIGHT', self.Power, 'BOTTOMRIGHT', 0, -4)
+		self.Castbar:SetHeight(4)
+		self.Castbar.Icon:SetSize(40, 40)
+		self.Castbar.Icon:ClearAllPoints()
+		self.Castbar.Icon:SetPoint('BOTTOMLEFT', self.Castbar, 'BOTTOMRIGHT', 5, -1)
+
 		local nameText = addon.elements.Text(self.Health)
 		self:Tag(nameText, '[AelUI:name]')
 		nameText:SetPoint('BOTTOMRIGHT', self, 'TOPRIGHT', -4, -6)
