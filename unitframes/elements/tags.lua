@@ -12,6 +12,16 @@ oUF.Tags.Methods['AelUI:name'] = function(unit)
 	return name
 end
 
+oUF.Tags.Events['AelUI:healthpercent'] = 'UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH'
+oUF.Tags.Methods['AelUI:healthpercent'] = function(unit)
+	local max = UnitHealthMax(unit)
+	if max == 0 then
+		return 0
+	end
+
+	return math.floor(UnitHealth(unit) / max * 100 + .5)
+end
+
 oUF.Tags.Events['AelUI:power'] = 'UNIT_DISPLAYPOWER UNIT_MAXPOWER UNIT_POWER_FREQUENT'
 oUF.Tags.Methods['AelUI:power'] = function(unit)
 	return UnitPower(unit)

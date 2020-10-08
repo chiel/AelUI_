@@ -41,6 +41,12 @@ addon.units.boss = {
 
 		local nameText = addon.elements.Text(self.Health)
 		self:Tag(nameText, '[AelUI:name]')
+		nameText:SetJustifyH('RIGHT')
 		nameText:SetPoint('BOTTOMRIGHT', self, 'TOPRIGHT', -4, -6)
+
+		local healthText = addon.elements.Text(self.Health)
+		self:Tag(healthText, '[AelUI:healthpercent]')
+		healthText:SetJustifyH('LEFT')
+		healthText:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 4, -6)
 	end,
 }
