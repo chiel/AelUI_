@@ -82,8 +82,8 @@ addon.units.player = {
 		end
 
 		addon.elements.ClassPower(self, unit)
-		self.classPowerFrame:SetSize(298, 5)
-		self.classPowerFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
+		self.ClassPower.container:SetSize(298, 5)
+		self.ClassPower.container:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
 
 		if playerClass == 'DEATHKNIGHT' then
 			addon.elements.Runes(self, unit)

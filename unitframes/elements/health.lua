@@ -7,8 +7,7 @@ local function UpdateHealthColor(health, unit, cur, max)
 
 	local color = addon.utils.UnitColor(unit)
 	if color then
-		health:SetStatusBarColor(.15, .15, .15)
-		health.bd:SetBackdropColor(unpack(color))
+		health.bd:SetVertexColor(unpack(color))
 	end
 end
 
@@ -18,6 +17,7 @@ function addon.elements.Health(self, unit)
 	health.colorTapping = unit ~= 'raid'
 	health.colorDisconnected = true
 	health.frequentUpdates = true
+	health:SetStatusBarColor(.15, .15, .15)
 	health.UpdateColor = UpdateHealthColor
 	health.bd = addon.elements.Backdrop(health)
 

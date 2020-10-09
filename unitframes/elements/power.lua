@@ -5,7 +5,7 @@ function addon.elements.Power(self, unit)
 	power:SetStatusBarTexture(addon.media.texture)
 	power.colorPower = true
 	power.frequentUpdates = true
-	power.bd = addon.elements.Backdrop(power)
+	addon.elements.Backdrop(power)
 
 	self.Power = power
 end

@@ -3,15 +3,19 @@ local addon = select(2, ...)
 addon.elements = {}
 
 function addon.elements.Backdrop(parent, color)
-	r, g, b = unpack(color or {.2, .2, .2})
+	local bg = parent:CreateTexture(nil, 'BORDER')
+	bg:SetTexture(addon.media.textureBg)
+	bg:SetVertexColor(unpack(color or {.2, .2, .2}))
 
-	local bd = CreateFrame('Frame', nil, parent)
-	bd:SetFrameLevel(parent:GetFrameLevel() - 1)
-	bd:SetBackdrop(addon.media.backdrop)
-	bd:SetBackdropColor(r, g, b, 1)
-	bd:SetBackdropBorderColor(1, 0, 0)
-	bd:SetPoint('TOPLEFT', -1, 1)
-	bd:SetPoint('BOTTOMRIGHT', 1, -1)
+	if parent:GetObjectType() == 'StatusBar' then
+		bg:SetPoint('TOPRIGHT', parent)
+		bg:SetPoint('BOTTOMLEFT', parent:GetStatusBarTexture(), 'BOTTOMRIGHT')
+	else
+		bg:SetAllPoints()
+	end
 
-	return bd
+	parent:SetBackdrop({ edgeFile = addon.media.border, edgeSize = -1 })
+	parent:SetBackdropBorderColor(0, 0, 0, 1)
+
+	return bg
 end

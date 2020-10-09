@@ -21,13 +21,7 @@ addon.colors = setmetatable({
 }, {__index = oUF.colors})
 
 addon.media = {
-	backdrop = {
-		bgFile = [[Interface\Buttons\WHITE8X8]],
-		edgeFile = [[Interface\AddOns\AelUI\border]],
-		tile = false, tileSize = 4, edgeSize = 1,
-		insets = { top = 1, left = 1, right = 1, bottom = 1 }
-	},
-	border = [[Interface\AddOns\AelUI\border]],
+	border = [[Interface\Buttons\WHITE8X8]],
 	font = [[Interface\AddOns\AelUI\media\AvantGardeBookBT.ttf]],
 	fontPixel = [[Interface\AddOns\AelUI\media\semplice.ttf]],
 	texture = [[Interface\AddOns\AelUI\media\statusbar]],
