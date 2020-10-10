@@ -20,7 +20,7 @@ addon.units.party = {
 			'aelUI_party', nil, 'party',
 			'showParty', true,
 			'showPlayer', true,
-			'yOffset', -24,
+			'yOffset', -48,
 			'groupBy', 'ASSIGNEDROLE',
 			'groupingOrder', 'TANK,HEALER,DAMAGER',
 			'oUF-initialConfigFunction', [[
@@ -29,7 +29,7 @@ addon.units.party = {
 			]]
 		)
 
-		party:SetPoint('TOPRIGHT', UIParent, 'CENTER', -596, 90)
+		party:SetPoint('TOPRIGHT', UIParent, 'CENTER', -596, 200)
 	end,
 
 	style = function(self, unit)
@@ -55,7 +55,7 @@ addon.units.party = {
 
 		self.Range = {
 			insideAlpha = 1,
-			outsideAlpha = .6,
+			outsideAlpha = .5,
 		}
 	end,
 }

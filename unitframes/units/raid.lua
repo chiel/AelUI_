@@ -67,7 +67,7 @@ addon.units.raid = {
 
 		self.Range = {
 			insideAlpha = 1,
-			outsideAlpha = .6,
+			outsideAlpha = .5,
 		}
 	end,
 }
