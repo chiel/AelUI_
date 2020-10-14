@@ -14,8 +14,12 @@ function addon.elements.Backdrop(parent, color)
 		bg:SetAllPoints()
 	end
 
-	parent:SetBackdrop({ edgeFile = addon.media.border, edgeSize = -1 })
-	parent:SetBackdropBorderColor(0, 0, 0, 1)
+	local border = CreateFrame('Frame', nil, parent, 'BackdropTemplate')
+	border:SetBackdrop({ edgeFile = addon.media.border, edgeSize = 1 })
+	border:SetBackdropBorderColor(0, 0, 0, 1)
+	border:SetPoint('TOPLEFT', -1, 1)
+	border:SetPoint('BOTTOMRIGHT', 1, -1)
+	border:SetFrameLevel(parent:GetFrameLevel() - 1)
 
 	return bg
 end

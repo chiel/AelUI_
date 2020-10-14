@@ -12,7 +12,7 @@ oUF.Tags.Methods['AelUI:name'] = function(unit)
 	return name
 end
 
-oUF.Tags.Events['AelUI:healthpercent'] = 'UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH'
+oUF.Tags.Events['AelUI:healthpercent'] = 'UNIT_HEALTH UNIT_MAXHEALTH'
 oUF.Tags.Methods['AelUI:healthpercent'] = function(unit)
 	local max = UnitHealthMax(unit)
 	if max == 0 then
