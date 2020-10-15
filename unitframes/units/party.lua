@@ -53,6 +53,10 @@ addon.units.party = {
 		self:Tag(name, '[AelUI:name]')
 		name:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 4, -6)
 
+		addon.elements.Leader(self, unit)
+		self.LeaderIndicator:SetParent(self.Health)
+		self.LeaderIndicator:SetPoint('LEFT', name, 'RIGHT', 4, -2)
+
 		self.Range = {
 			insideAlpha = 1,
 			outsideAlpha = .5,

@@ -53,6 +53,10 @@ addon.units.player = {
 		self:Tag(name, '[AelUI:name]')
 		name:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 4, -6)
 
+		addon.elements.Leader(self, unit)
+		self.LeaderIndicator:SetParent(self.Health)
+		self.LeaderIndicator:SetPoint('LEFT', name, 'RIGHT', 4, -2)
+
 		local powerText = addon.elements.Text(self.Power)
 		self:Tag(powerText, '[AelUI:power]')
 		powerText:SetJustifyH('CENTER')

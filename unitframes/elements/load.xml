@@ -3,6 +3,7 @@
 	<Script file="castbar.lua"/>
 	<Script file="classpower.lua"/>
 	<Script file="health.lua"/>
+	<Script file="leader.lua"/>
 	<Script file="power.lua"/>
 	<Script file="runes.lua"/>
 	<Script file="tags.lua"/>
