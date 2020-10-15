@@ -65,6 +65,10 @@ addon.units.raid = {
 		self:Tag(text, '[AelUI:raidtext]')
 		text:SetPoint('BOTTOM', self, 'BOTTOM', 0, 12)
 
+		addon.elements.GroupRole(self, unit)
+		self.GroupRoleIndicator:SetParent(self.Health)
+		self.GroupRoleIndicator:SetPoint('TOPLEFT', 4, -4)
+
 		self.Range = {
 			insideAlpha = 1,
 			outsideAlpha = .5,

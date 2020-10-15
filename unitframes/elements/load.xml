@@ -2,6 +2,7 @@
 	<Script file="init.lua"/>
 	<Script file="castbar.lua"/>
 	<Script file="classpower.lua"/>
+	<Script file="grouprole.lua"/>
 	<Script file="health.lua"/>
 	<Script file="leader.lua"/>
 	<Script file="power.lua"/>

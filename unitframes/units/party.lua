@@ -57,6 +57,10 @@ addon.units.party = {
 		self.LeaderIndicator:SetParent(self.Health)
 		self.LeaderIndicator:SetPoint('LEFT', name, 'RIGHT', 4, -2)
 
+		addon.elements.GroupRole(self, unit)
+		self.GroupRoleIndicator:SetParent(self.Health)
+		self.GroupRoleIndicator:SetPoint('RIGHT', self.Health, 'TOPRIGHT', -4, 0)
+
 		self.Range = {
 			insideAlpha = 1,
 			outsideAlpha = .5,
