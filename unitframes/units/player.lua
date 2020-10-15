@@ -16,6 +16,10 @@ local updateClassResources = function(self, unit)
 	local hasClassResources = classResourceMap[playerClass]
 		and classResourceMap[playerClass][playerSpec]
 
+	if playerClass == 'DRUID' and GetShapeshiftForm() == 2 then
+		hasClassResources = true
+	end
+
 	if hasClassResources then
 		self.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -306)
 		self.Power:SetHeight(6)
@@ -99,8 +103,9 @@ addon.units.player = {
 
 		local f = CreateFrame('Frame')
 		f:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED')
-		f:SetScript('OnEvent', function(_, event, u)
-			if event == 'PLAYER_SPECIALIZATION_CHANGED' and u == 'player' then
+		f:RegisterEvent('UPDATE_SHAPESHIFT_FORM')
+		f:SetScript('OnEvent', function(_, event, u, ...)
+			if event == 'UPDATE_SHAPESHIFT_FORM' or (event == 'PLAYER_SPECIALIZATION_CHANGED' and u == 'player') then
 				updateClassResources(self, unit)
 			end
 		end)
