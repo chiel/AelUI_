@@ -4,6 +4,9 @@
 ## Version: 0.1
 ## Dependencies: oUF
 
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+libs\LibSharedMedia-3.0\lib.xml
 libs\UTF8\utf8.lua
 init.lua
 utils\load.xml

@@ -1,5 +1,13 @@
 local addon = select(2, ...)
 
+local LSM = LibStub('LibSharedMedia-3.0')
+local MT = LSM.MediaType
+LSM:Register(MT.FONT, 'AelUI font', [[Interface\AddOns\AelUI\media\RobotoCondensed-Regular.ttf]])
+LSM:Register(MT.FONT, 'AelUI pixel font', [[Interface\AddOns\AelUI\media\semplice.ttf]])
+LSM:Register(MT.BACKGROUND, 'AelUI background', [[Interface\Buttons\WHITE8X8]])
+LSM:Register(MT.BORDER, 'AelUI border', [[Interface\Buttons\WHITE8X8]])
+LSM:Register(MT.STATUSBAR, 'AelUI bar', [[Interface\AddOns\AelUI\media\statusbar]])
+
 addon.colors = setmetatable({
 	power = setmetatable({
 		['ENERGY'] = { 0.7372549019607844, 0.6862745098039216, 0.3764705882352941 },
