@@ -29,6 +29,8 @@ addon.units.raid = {
 				'unitsPerColumn', 5,
 				'yOffset', -8,
 				'groupFilter', i,
+				'groupBy', 'ASSIGNEDROLE',
+				'groupingOrder', 'TANK,HEALER,DAMAGER',
 				'oUF-initialConfigFunction', [[
 					self:SetWidth(68)
 					self:SetHeight(56)
