@@ -61,6 +61,15 @@ addon.units.party = {
 		self.GroupRoleIndicator:SetParent(self.Health)
 		self.GroupRoleIndicator:SetPoint('RIGHT', self.Health, 'TOPRIGHT', -4, 0)
 
+		local debuffs = CreateFrame('Frame', nil, self)
+		debuffs:SetPoint('TOPLEFT', self, 'TOPRIGHT', 5, 1)
+		debuffs:SetSize(32 * 10, 32)
+		debuffs.size = 32
+		debuffs.spacing = 4
+		debuffs.initialAnchor = 'TOPLEFT'
+		debuffs['growth-x'] = 'RIGHT'
+		self.Debuffs = debuffs
+
 		self.Range = {
 			insideAlpha = 1,
 			outsideAlpha = .5,
