@@ -8,7 +8,8 @@ local function UpdateHealthColor(self, event, unit)
 
 	local color = addon.utils.UnitColor(unit)
 	if color then
-		element.bd:SetVertexColor(unpack(color))
+		local r, g, b = unpack(color)
+		element.bd:SetVertexColor(r * .75, g * .75, b * .75)
 	end
 end
 
