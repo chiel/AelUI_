@@ -17,7 +17,7 @@ end
 addon.units.party = {
 	spawn = function(self)
 		local party = self:SpawnHeader(
-			'aelUI_party', nil, 'party',
+			nil, nil, 'party',
 			'showParty', true,
 			'showPlayer', true,
 			'yOffset', -48,
