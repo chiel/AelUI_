@@ -1,7 +1,7 @@
 local addon = select(2, ...)
 
 local function PostUpdate(self, cur, max, maxChanged, powerType)
-	if not self.isEnabled then
+	if not self.__isEnabled then
 		self.container:Hide()
 		return
 	end
