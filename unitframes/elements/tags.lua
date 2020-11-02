@@ -19,7 +19,7 @@ oUF.Tags.Methods['AelUI:healthpercent'] = function(unit)
 		return 0
 	end
 
-	return math.floor(UnitHealth(unit) / max * 100 + .5)
+	return string.format('%d%%', math.floor(UnitHealth(unit) / max * 100 + .5))
 end
 
 oUF.Tags.Events['AelUI:power'] = 'UNIT_DISPLAYPOWER UNIT_MAXPOWER UNIT_POWER_FREQUENT'
