@@ -4,17 +4,18 @@ local playerClass = select(2, UnitClass('player'))
 
 local classResourceMap = {
 	DEATHKNIGHT = { BLOOD = true, FROST = true, UNHOLY = true },
+	DEMONHUNTER = { VENGEANCE = true },
 	MAGE = { ARCANE = true,  },
 	MONK = { WINDWALKER = true },
-	PALADIN = { HOLY = true },
+	PALADIN = { HOLY = true, PROTECTION = true, RETRIBUTION = true },
 	ROGUE = { ASSASSINATION = true, OUTLAW = true, SUBTLETY = true },
 	WARLOCK = { AFFLICTION = true, DEMONOLOGY = true, DESTRUCTION = true },
 }
 
 local updateClassResources = function(self, unit)
 	local playerSpec = addon.utils.GetSpecName()
-	local hasClassResources = classResourceMap[playerClass]
-		and classResourceMap[playerClass][playerSpec]
+	local hasClassResources = (classResourceMap[playerClass] and classResourceMap[playerClass][playerSpec])
+		or (classResourceMap[playerClass] and playerSpec == '')
 
 	if playerClass == 'DRUID' and GetShapeshiftForm() == 2 then
 		hasClassResources = true
