@@ -7,6 +7,7 @@ local buffsPerClass = {
 		[33763]  = { color = {48 / 255, 128 / 255, 56 / 255},  position = {'TOP', 0, -3} },   -- Lifebloom
 		[48438]  = { color = {83 / 255, 218 / 255, 137 / 255}, position = {'TOP', -11, -3} },  -- Wild Growth
 		[102351] = { color = {184 / 255, 242 / 255, 122 / 255}, position = {'TOP', -22, -3} }, -- Cenarion Ward
+		-- [155777] = { color = {165 / 255, 23 / 255, 157 / 255}, position = {'RIGHT', -44, 0} },  -- Rejuvenation (Germination)
 	},
 	MONK = {
 		[115175] = { color = {1, 1, 1}, position = {'RIGHT', -26, 0} }, -- Soothing Mist
@@ -91,7 +92,9 @@ local function Position(raid)
 	end
 end
 
-addon.units.raid = {
+table.insert(addon.units, {
+	unit = 'raid',
+
 	spawn = function(self)
 		local spec = addon.utils.GetSpecName()
 		local isHealer = addon.utils.IsHealerSpec(spec)
@@ -102,6 +105,8 @@ addon.units.raid = {
 		for i = 1, NUM_RAID_GROUPS do
 			raid[i] = self:SpawnHeader(
 				nil, nil, 'raid',
+				'showSolo', true, -- debug
+				-- 'showParty', true, -- debug
 				'showPlayer', true,
 				'showRaid', true,
 				'maxColumns', 1,
@@ -123,6 +128,8 @@ addon.units.raid = {
 		f:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED')
 		f:SetScript('OnEvent', function(_, event)
 			if event == 'PLAYER_SPECIALIZATION_CHANGED' then
+				-- local spec = addon.utils.GetSpecName()
+				-- print('SPECIALIZATION CHANGED', spec)
 				Position(raid)
 			end
 		end)
@@ -168,4 +175,4 @@ addon.units.raid = {
 			outsideAlpha = .5,
 		}
 	end,
-}
+})

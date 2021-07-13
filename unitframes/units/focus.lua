@@ -1,10 +1,12 @@
 local addon = select(2, ...)
 
-addon.units.focus = {
+table.insert(addon.units, {
+	unit = 'focus',
+
 	spawn = function(self)
-		local f = self:Spawn('focus')
-		f:SetSize(150, 20)
-		f:SetPoint('TOPRIGHT', UIParent, 'CENTER', -497, -310)
+		local f = self:Spawn('focus', 'AelUIFocusFrame')
+		f:SetSize(200, 30)
+		f:SetPoint('BOTTOMRIGHT', AelUIPlayerFrame, 'TOPRIGHT', -50, 162)
 	end,
 
 	style = function(self, unit)
@@ -20,5 +22,9 @@ addon.units.focus = {
 		local name = addon.elements.Text(self.Health)
 		self:Tag(name, '[AelUI:name]')
 		name:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 4, -6)
+
+		addon.elements.RaidTarget(self, unit)
+		self.RaidTargetIndicator:SetParent(self.Health)
+		self.RaidTargetIndicator:SetPoint('CENTER', self.Health)
 	end,
-}
+})

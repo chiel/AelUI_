@@ -12,6 +12,12 @@ oUF.Tags.Methods['AelUI:name'] = function(unit)
 	return name
 end
 
+oUF.Tags.Events['AelUI:health'] = 'UNIT_HEALTH UNIT_MAXHEALTH'
+oUF.Tags.Methods['AelUI:health'] = function(unit)
+	local hp = UnitHealth(unit)
+	return AbbreviateNumbers(hp)
+end
+
 oUF.Tags.Events['AelUI:healthpercent'] = 'UNIT_HEALTH UNIT_MAXHEALTH'
 oUF.Tags.Methods['AelUI:healthpercent'] = function(unit)
 	local max = UnitHealthMax(unit)

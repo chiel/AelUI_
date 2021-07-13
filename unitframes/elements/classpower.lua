@@ -1,5 +1,22 @@
 local addon = select(2, ...)
 
+local function UpdatePositions(self)
+	local totalWidth = math.floor(self.container:GetWidth() + .5) + 2
+	local max = self.__max
+	local width = math.floor(totalWidth / max)
+	local rest = totalWidth - (width * max) - 1
+
+	for i = 1, max do
+		local w = width - 1
+		if rest > 0 then
+			w = w + 1
+			rest = rest - 1
+		end
+
+		self[i].backdrop:SetWidth(w)
+	end
+end
+
 local function PostUpdate(self, cur, max, maxChanged, powerType)
 	if not self.__isEnabled then
 		self.container:Hide()
@@ -9,19 +26,15 @@ local function PostUpdate(self, cur, max, maxChanged, powerType)
 	self.container:Show()
 	if not maxChanged then return end
 
-	local width = (math.floor(self.container:GetWidth() + .5) + 2) / max
 	for i = 1, 10 do
-		local bar = self[i]
-		local bd = bar.backdrop
-
 		if i <= max then
-			bd:SetWidth(width - 2)
-			bd:SetPoint('LEFT', (i - 1) * width, 0)
-			bd:Show()
+			self[i].backdrop:Show()
 		else
-			bd:Hide()
+			self[i].backdrop:Hide()
 		end
 	end
+
+	UpdatePositions(self)
 end
 
 function addon.elements.ClassPower(self, unit)
@@ -31,9 +44,14 @@ function addon.elements.ClassPower(self, unit)
 	local classPower = {}
 	for i = 1, 10 do
 		local bd = CreateFrame('Frame', nil, container)
+		addon.elements.Backdrop(bd)
 		bd:SetPoint('TOP')
 		bd:SetPoint('BOTTOM')
-		addon.elements.Backdrop(bd)
+		bd:SetPoint('LEFT')
+
+		if i > 1 then
+			bd:SetPoint('LEFT', classPower[i - 1].backdrop, 'RIGHT', 1, 0)
+		end
 
 		local bar = CreateFrame('StatusBar', nil, bd)
 		bar:SetStatusBarTexture(addon.media.texture)
@@ -47,4 +65,8 @@ function addon.elements.ClassPower(self, unit)
 
 	classPower.container = container
 	self.ClassPower = classPower
+
+	container:HookScript('OnSizeChanged', function()
+		UpdatePositions(classPower)
+	end)
 end

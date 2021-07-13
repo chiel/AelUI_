@@ -1,0 +1,61 @@
+local addon = select(2, ...)
+
+-- hooksecurefunc('GameTooltip_SetDefaultAnchor', function(s, p)
+-- 	s:SetOwner(p, 'ANCHOR_CURSOR')
+-- end)
+
+-- addon.actionbars = {}
+--
+-- function addon.actionbars.HandleSlashCmd(opts)
+-- 	opts = string.lower(opts or '')
+--
+-- 	if opts == 'hide' then
+-- 		addon.actionbars.Hide()
+-- 	elseif opts == 'show' then
+-- 		addon.actionbars.Show()
+-- 	end
+-- end
+--
+-- function addon.actionbars.Hide()
+-- 	MainMenuBarArtFrame.LeftEndCap:Hide()
+-- 	MainMenuBarArtFrame.RightEndCap:Hide()
+--
+-- 	MicroButtonAndBagsBar:Hide()
+-- 	CharacterMicroButton:Hide()
+-- 	SpellbookMicroButton:Hide()
+-- 	TalentMicroButton:Hide()
+-- 	AchievementMicroButton:Hide()
+-- 	QuestLogMicroButton:Hide()
+-- 	GuildMicroButton:Hide()
+-- 	LFDMicroButton:Hide()
+-- 	CollectionsMicroButton:Hide()
+-- 	EJMicroButton:Hide()
+-- 	StoreMicroButton:Hide()
+-- 	MainMenuMicroButton:Hide()
+-- end
+--
+-- function addon.actionbars.Show()
+-- 	MainMenuBarArtFrame.LeftEndCap:Show()
+-- 	MainMenuBarArtFrame.RightEndCap:Show()
+--
+-- 	MicroButtonAndBagsBar:Show()
+-- 	CharacterMicroButton:Show()
+-- 	SpellbookMicroButton:Show()
+-- 	TalentMicroButton:Show()
+-- 	AchievementMicroButton:Show()
+-- 	QuestLogMicroButton:Show()
+-- 	GuildMicroButton:Show()
+-- 	LFDMicroButton:Show()
+-- 	CollectionsMicroButton:Show()
+-- 	EJMicroButton:Show()
+-- 	StoreMicroButton:Show()
+-- 	MainMenuMicroButton:Show()
+-- end
+--
+-- local f = CreateFrame('Frame', nil, UIParent)
+-- f:RegisterEvent('PLAYER_ENTERING_WORLD')
+-- f:SetScript('OnEvent', function(self, event, ...)
+-- 	print('EVENT! - ', event)
+-- 	addon.actionbars.Hide()
+-- 	f:UnregisterAllEvents()
+-- end)

@@ -1,10 +1,12 @@
 local addon = select(2, ...)
 
-addon.units.targettarget = {
+table.insert(addon.units, {
+	unit = 'targettarget',
+
 	spawn = function(self)
-		local f = self:Spawn('targettarget')
+		local f = self:Spawn('targettarget', 'AelUITargetTargetFrame')
 		f:SetSize(150, 20)
-		f:SetPoint('TOPLEFT', UIParent, 'CENTER', 497, -310)
+		f:SetPoint('BOTTOMLEFT', AelUITargetFrame, 'BOTTOMRIGHT', 4, 0)
 	end,
 
 	style = function(self, unit)
@@ -21,4 +23,4 @@ addon.units.targettarget = {
 		self:Tag(name, '[AelUI:name]')
 		name:SetPoint('BOTTOMRIGHT', self, 'TOPRIGHT', -4, -6)
 	end,
-}
+})

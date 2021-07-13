@@ -6,6 +6,7 @@
 	<Script file="health.lua"/>
 	<Script file="leader.lua"/>
 	<Script file="power.lua"/>
+	<Script file="raidtarget.lua"/>
 	<Script file="runes.lua"/>
 	<Script file="tags.lua"/>
 	<Script file="text.lua"/>

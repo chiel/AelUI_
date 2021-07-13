@@ -1,0 +1,32 @@
+print("AelUI: unitframes/units/nameplates.lua")
+-- local addon = select(2, ...)
+--
+-- local cvars = {
+-- 	nameplateMaxScale = 1,
+-- 	nameplateMinScale = 1,
+-- }
+--
+-- addon.units.nameplates = {
+-- 	spawn = function(self)
+-- 		local function NamePlateCallback(frame, ...)
+-- 			print(frame, ...)
+-- 			frame:SetSize(128, 8)
+-- 			frame:SetPoint('CENTER')
+-- 		end
+--
+-- 		self:SpawnNamePlates('AelUI', NamePlateCallback, cvars)
+-- 	end,
+--
+-- 	style = function(frame, unit)
+-- 		print('STYLE', unit, frame)
+-- 		-- frame:SetSize(300, 30)
+--
+-- 		addon.elements.Health(frame, unit)
+-- 		frame.Health:SetPoint('TOPLEFT', 1, -1)
+-- 		frame.Health:SetPoint('BOTTOMRIGHT', -1, 1)
+--
+-- 		local name = addon.elements.Text(frame.Health)
+-- 		frame:Tag(name, '[AelUI:name]')
+-- 		name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 4, -6)
+-- 	end
+-- }

@@ -22,19 +22,33 @@ local updateClassResources = function(self, unit)
 	end
 
 	if hasClassResources then
-		self.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -306)
-		self.Power:SetHeight(6)
+		-- self.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -306)
+		self.Power:SetHeight(8)
 	else
-		self.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
-		self.Power:SetHeight(12)
+		-- self.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
+		self.Power:SetHeight(16)
 	end
 end
 
-addon.units.player = {
+table.insert(addon.units, {
+	unit = 'player',
+
 	spawn = function(self)
-		local f = self:Spawn('player')
-		f:SetSize(300, 30)
-		f:SetPoint('TOPRIGHT', UIParent, 'CENTER', -191, -300)
+		local f = self:Spawn('player', 'AelUIPlayerFrame')
+		f:SetSize(300, 42)
+		f:SetPoint('TOPRIGHT', UIParent, 'CENTER', -187, -163)
+
+		local ff = CreateFrame('Frame')
+		ff:RegisterEvent('PLAYER_ENTERING_WORLD')
+		ff:SetScript('OnEvent', function()
+			local waRegion = WeakAuras.GetRegion('Class - '..playerClass..' - Primary')
+			if not waRegion then
+				return
+			end
+
+			f:ClearAllPoints()
+			f:SetPoint('TOPRIGHT', waRegion, 'TOPLEFT', -21, -1)
+		end)
 	end,
 
 	style = function(self, unit)
@@ -47,12 +61,38 @@ addon.units.player = {
 		addon.elements.Health(self, unit)
 		self.Health:SetAllPoints()
 
-		addon.elements.Power(self, unit)
-		self.Power:SetWidth(298)
+		local tx = self.Health:CreateTexture()
+		tx:SetTexture(addon.media.textureStriped, "REPEAT")
+		local absorbBar = CreateFrame('StatusBar', nil, self.Health)
+		absorbBar:SetStatusBarTexture(tx)
+		absorbBar:SetAllPoints()
 
-		addon.elements.Castbar(self, unit)
-		self.Castbar:SetPoint('TOP', UIParent, 'CENTER', 0, -318)
-		self.Castbar:SetSize(298, 12)
+		self.HealthPrediction = {
+			absorbBar = absorbBar,
+			maxOverflow = 2,
+		}
+		-- absorbBar:SetPoint('TOP')
+		-- absorbBar:SetPoint('BOTTOM')
+		-- absorbBar:SetPoint('LEFT')
+
+		addon.elements.Power(self, unit, 'AelUIPlayerPowerBar')
+		self.Power:SetSize(298, 12)
+		-- self.Power:SetPoint('TOP', UIParent, 'CENTER', 0, -200)
+
+		local ff = CreateFrame('Frame')
+		ff:RegisterEvent('PLAYER_ENTERING_WORLD')
+		ff:SetScript('OnEvent', function()
+			local waRegion = WeakAuras.GetRegion('Class - '..playerClass..' - Primary')
+			if not waRegion then return end
+
+			self.Power:ClearAllPoints()
+			self.Power:SetPoint('BOTTOMLEFT', waRegion, 'TOPLEFT', 1, 3)
+			self.Power:SetPoint('BOTTOMRIGHT', waRegion, 'TOPRIGHT', -1, 3)
+		end)
+
+		-- addon.elements.Castbar(self, unit)
+		-- self.Castbar:SetPoint('TOP', UIParent, 'CENTER', 0, -318)
+		-- self.Castbar:SetSize(298, 12)
 
 		local name = addon.elements.Text(self.Health)
 		self:Tag(name, '[AelUI:name]')
@@ -62,12 +102,20 @@ addon.units.player = {
 		self.LeaderIndicator:SetParent(self.Health)
 		self.LeaderIndicator:SetPoint('LEFT', name, 'RIGHT', 4, -2)
 
-		local powerText = addon.elements.Text(self.Power, { size = 16 })
+		local healthPercent = addon.elements.Text(self.Health, { size = 18 })
+		self:Tag(healthPercent, '[AelUI:healthpercent]')
+		healthPercent:SetPoint('BOTTOMRIGHT', self, 'BOTTOMRIGHT', -2, -4)
+
+		local healthText = addon.elements.Text(self.Health, { size = 14 })
+		self:Tag(healthText, '[AelUI:health]')
+		healthText:SetPoint('BOTTOMRIGHT', healthPercent, 'TOPRIGHT', 0, 0)
+
+		local powerText = addon.elements.Text(self.Power, { size = 18 })
 		self:Tag(powerText, '[AelUI:power]')
 		powerText:SetJustifyH('CENTER')
-		powerText:SetPoint('BOTTOM', self.Power, 'BOTTOM', 0, -2)
-		local powerTextShown = true
+		powerText:SetPoint('BOTTOM', self.Power, 'BOTTOM', 0, -1)
 
+		local powerTextShown = true
 		local _, powerType = UnitPowerType('player')
 		if powerType == 'MANA' then
 			powerText:Hide()
@@ -91,13 +139,21 @@ addon.units.player = {
 		end
 
 		addon.elements.ClassPower(self, unit)
-		self.ClassPower.container:SetSize(298, 5)
-		self.ClassPower.container:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
+		-- self.ClassPower.container:SetSize(298, 5)
+		-- self.ClassPower.container:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
+		self.ClassPower.container:ClearAllPoints()
+		self.ClassPower.container:SetHeight(7)
+		self.ClassPower.container:SetPoint('BOTTOMLEFT', self.Power, 'TOPLEFT', 0, 1)
+		self.ClassPower.container:SetPoint('BOTTOMRIGHT', self.Power, 'TOPRIGHT', 0, 1)
 
 		if playerClass == 'DEATHKNIGHT' then
 			addon.elements.Runes(self, unit)
-			self.runesFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
-			self.runesFrame:SetSize(298, 5)
+			self.Runes.container:ClearAllPoints()
+			self.Runes.container:SetHeight(7)
+			self.Runes.container:SetPoint('BOTTOMLEFT', self.Power, 'TOPLEFT', 0, 1)
+			self.Runes.container:SetPoint('BOTTOMRIGHT', self.Power, 'TOPRIGHT', 0, 1)
+			-- self.runesFrame:SetPoint('TOP', UIParent, 'CENTER', 0, -300)
+			-- self.runesFrame:SetSize(298, 5)
 		end
 
 		updateClassResources(self, unit)
@@ -110,5 +166,9 @@ addon.units.player = {
 				updateClassResources(self, unit)
 			end
 		end)
+
+		-- self.Power:HookScript('OnSizeChanged', function()
+		-- 	print('SIZE CHANGED')
+		-- end)
 	end,
-}
+})

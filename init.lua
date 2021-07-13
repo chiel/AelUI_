@@ -7,6 +7,7 @@ LSM:Register(MT.FONT, 'AelUI pixel font', [[Interface\AddOns\AelUI\media\semplic
 LSM:Register(MT.BACKGROUND, 'AelUI background', [[Interface\Buttons\WHITE8X8]])
 LSM:Register(MT.BORDER, 'AelUI border', [[Interface\Buttons\WHITE8X8]])
 LSM:Register(MT.STATUSBAR, 'AelUI bar', [[Interface\AddOns\AelUI\media\statusbar]])
+LSM:Register(MT.STATUSBAR, 'AelUI pixelbar', [[Interface\AddOns\AelUI\media\pixelbar]])
 
 addon.colors = setmetatable({
 	power = setmetatable({
@@ -34,4 +35,39 @@ addon.media = {
 	fontPixel = [[Interface\AddOns\AelUI\media\semplice.ttf]],
 	texture = [[Interface\AddOns\AelUI\media\statusbar]],
 	textureBg = [[Interface\Buttons\WHITE8X8]],
+	textureStriped = [[Interface\AddOns\Kui_Media\t\stippled-bar.tga]],
 }
+
+hooksecurefunc('GameTooltip_SetDefaultAnchor', function(self, parent)
+	self:SetOwner(parent, 'ANCHOR_NONE')
+	self:ClearAllPoints()
+	self:SetPoint('BOTTOMRIGHT', UIParent, 'BOTTOMRIGHT', -456, 15)
+end)
+
+-- local f = CreateFrame('Frame')
+-- f:RegisterEvent('PLAYER_ENTERING_WORLD')
+-- f:SetScript('OnEvent', function()
+-- 	print('DO THE THINGS')
+-- 	PlayerFrame:ClearAllPoints()
+-- 	PlayerFrame:SetPoint('BOTTOMRIGHT', UIParent, 'CENTER', -500, 200)
+--
+-- 	TargetFrame:ClearAllPoints()
+-- 	TargetFrame:SetPoint('BOTTOMLEFT', UIParent, 'CENTER', -500, 200)
+--
+-- 	FocusFrame:ClearAllPoints()
+-- 	FocusFrame:SetPoint('BOTTOMLEFT', UIParent, 'CENTER', -500, 0)
+-- end)
+
+-- SLASH_AELUI1 = '/aui'
+-- SLASH_AELUI2 = '/aelui'
+-- SlashCmdList.AELUI = function(msg)
+-- 	local cmd, opts = string.match(msg, '(%S+)%s(.*)')
+-- 	cmd = string.lower(cmd or '')
+-- 	opts = string.gsub(opts or '', '^%s*(.-)%s*$', '%1')
+--
+-- 	if cmd == 'actionbars' or cmd == 'bars' then
+-- 		addon.actionbars.HandleSlashCmd(opts)
+-- 	end
+--
+-- 	print('CMD', cmd, opts)
+-- end

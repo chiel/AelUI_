@@ -1,12 +1,12 @@
 local addon = select(2, ...)
 
-for unit, conf in pairs(addon.units) do
-	oUF:RegisterStyle('AelUI:'..unit, conf.style)
+for i, conf in ipairs(addon.units) do
+	oUF:RegisterStyle('AelUI:'..conf.unit, conf.style)
 end
 
 oUF:Factory(function(self)
-	for unit, conf in pairs(addon.units) do
-		self:SetActiveStyle('AelUI:'..unit)
+	for i, conf in ipairs(addon.units) do
+		self:SetActiveStyle('AelUI:'..conf.unit)
 		conf.spawn(self)
 	end
 end)

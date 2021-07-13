@@ -2,12 +2,14 @@
 ## Title: AelUI
 ## Author: Aelen
 ## Version: 0.1
-## Dependencies: oUF
+## Dependencies: oUF, WeakAuras
 
 libs\LibStub\LibStub.lua
 libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
 libs\LibSharedMedia-3.0\lib.xml
 libs\UTF8\utf8.lua
 init.lua
+actionbars\load.xml
 utils\load.xml
 unitframes\load.xml
+other\load.xml

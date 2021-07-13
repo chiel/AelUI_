@@ -1,10 +1,14 @@
 local addon = select(2, ...)
 
-addon.units.pet = {
+table.insert(addon.units, {
+	unit = 'pet',
+
 	spawn = function(self)
-		local f = self:Spawn('pet')
-		f:SetSize(156, 30)
-		f:SetPoint('TOPRIGHT', UIParent, 'CENTER', -335, -336)
+		local f = self:Spawn('pet', 'AelUIPetFrame')
+		f:SetHeight(20)
+		-- f:SetSize(156, 30)
+		f:SetPoint('TOPLEFT', AelUIPlayerFrame, 'BOTTOMLEFT', 0, -4)
+		f:SetPoint('TOPRIGHT', AelUIPlayerFrame, 'BOTTOMRIGHT', 0, -4)
 	end,
 
 	style = function(self, unit)
@@ -17,4 +21,4 @@ addon.units.pet = {
 		addon.elements.Health(self, unit)
 		self.Health:SetAllPoints()
 	end,
-}
+})

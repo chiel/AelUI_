@@ -29,7 +29,7 @@ function addon.utils.UnitIsHealer(unit)
 	end
 
 	local maxPower = UnitPowerMax(unit, Enum.PowerType.Mana)
-	if maxPower >= 10000 then
+	if maxPower >= 50000 then
 		return true
 	end
 
